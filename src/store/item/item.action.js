@@ -12,24 +12,22 @@ export function loadUsers(currentPage) {
     }
 }
 
-export function removeItem(itemId) {
+export function removeUser(userId) {
     return async dispatch => {
         try {
-            await itemService.remove(itemId)
-
-            dispatch({ type: 'REMOVE_ITEM', itemId })
+            await itemService.remove(userId)
+            dispatch({ type: 'REMOVE_USER', userId })
         } catch (err) {
             console.log(err)
         }
     }
 }
 
-export function saveItem(item) {
+export function saveUser(user) {
     return async dispatch => {
         try {
-            const actionType = (item._id) ? 'UPDATE_ITEM' : 'ADD_ITEM'
-            let savedItem = await itemService.save(item)
-            dispatch({ type: actionType, item: savedItem })
+            await itemService.save(user)
+            dispatch({ type: 'ADD_USER', item: user })
         } catch (err) {
             console.log(err)
         }

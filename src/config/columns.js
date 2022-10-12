@@ -7,17 +7,17 @@ export const COLUMNS = [
             </span>
         ),
         Cell: ({ row }) =>
-            row.canExpand ? (
-                <span
-                    {...row.getToggleRowExpandedProps({
-                        style: {
-                            paddingLeft: `${row.depth * 2}rem`,
-                        },
-                    })}
-                >
-                    {row.isExpanded ? '👇' : '👉'}
-                </span>
-            ) : '👉',
+        (
+            <span
+                {...row.getToggleRowExpandedProps({
+                    style: {
+                        paddingLeft: `${row.depth * 2}rem`,
+                    },
+                })}
+            >
+                {row.isExpanded ? '👇' : '👉'}
+            </span>
+        )
     },
     {
         Header: 'Name',
@@ -56,7 +56,7 @@ export const COLUMNS = [
 ]
 
 
-export const subRowColumn  = [
+export const subRowColumn = [
     {
         Header: 'Account',
         accessor: 'account',

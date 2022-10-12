@@ -48,14 +48,13 @@ const inputs = [
 
 
 export const Form = (props) => {
-    const { } = props
-    const [form, setForm] = useState(() => (
+    const { onAddUser } = props
+    const [user, setUser] = useState(() => (
         {
             userId: '',
             status: '',
             firstName: '',
             lastName: '',
-            status: '',
             organizationCode: '',
             lastLoginDate: '',
             email: ''
@@ -65,12 +64,12 @@ export const Form = (props) => {
     const handleType = ({ target }) => {
         const { value } = target
         const { name } = target
-        setForm((prevState) => ({...prevState, [name]: value}))
+        setUser((prevState) => ({ ...prevState, [name]: value }))
     }
 
     const onSubmitForm = (ev) => {
         ev.preventDefault()
-        console.log(form)
+        onAddUser(user)
     }
 
     return (
@@ -80,7 +79,7 @@ export const Form = (props) => {
                     return (
                         <div key={input.id}>
                             <label>{input.label}</label>
-                            <input type={input.type} placeholder={input.label} name={input.name} onChange={handleType}/>
+                            <input type={input.type} placeholder={input.label} name={input.name} onChange={handleType} />
                         </div>
                     )
                 })}

@@ -24,6 +24,7 @@ async function get(entityType, entityId) {
 }
 
 async function post(entityType, newEntity) {
+    newEntity.userId = utilService.makeId()
     return query(entityType)
         .then(entities => {
             entities.push(newEntity)

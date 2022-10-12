@@ -1,4 +1,9 @@
 import './table-btns.scss'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { AiOutlineArrowRight } from 'react-icons/ai'
+
+
+
 export const TableBtns = (props) => {
     const { setCurrentPage, currentPage } = props
 
@@ -8,8 +13,9 @@ export const TableBtns = (props) => {
 
     return (
         <section className="pagination-btns">
-            <button onClick={() => onChangePage(-1)}>Prev</button>
-            <button onClick={() => onChangePage(1)}>Next</button>
+            <button onClick={() => onChangePage(-1)}><AiOutlineArrowLeft /></button>
+            <span>{currentPage}</span>
+            <button onClick={() => onChangePage(1)}><AiOutlineArrowRight /></button>
         </section>
     )
 }
