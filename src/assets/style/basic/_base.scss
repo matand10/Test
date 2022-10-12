@@ -53,3 +53,7 @@ button {
     all: unset;
     cursor: pointer;
 }
+
+input::placeholder {
+    color: #E0E0E0;
+}

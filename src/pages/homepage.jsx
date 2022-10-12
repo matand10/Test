@@ -14,13 +14,13 @@ import { Actions } from "../cmps/actions/actions"
 
 
 export const Homepage = () => {
-    const { users, user, userAccounts } = useSelector((storeState) => storeState.itemModule)
+    const { users, filteredUsers } = useSelector((storeState) => storeState.itemModule)
     const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
         dispatch(loadUsers(currentPage))
-    }, [currentPage])
+    }, [currentPage, filteredUsers])
 
     const onDeleteUser = (userId) => {
         dispatch(removeUser(userId))
@@ -30,10 +30,11 @@ export const Homepage = () => {
         dispatch(saveUser(user))
     }
 
+    const data = filteredUsers.length ? filteredUsers : users
     return (
         <section className="homepage-container">
-            <Actions />
-            <ExpandableTable columns={COLUMNS} data={users} onDeleteUser={onDeleteUser} />
+            <Actions users={users} />
+            <ExpandableTable columns={COLUMNS} data={data} onDeleteUser={onDeleteUser} />
             <TableBtns setCurrentPage={setCurrentPage} currentPage={currentPage} />
             <Form onAddUser={onAddUser} />
         </section>

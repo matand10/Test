@@ -1,7 +1,8 @@
 const initialState = {
     users: [],
     user: {},
-    userAccounts: []
+    userAccounts: [],
+    filteredUsers: []
 }
 
 export function itemReducer(state = initialState, action) {
@@ -11,6 +12,8 @@ export function itemReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_USERS':
             return { ...state, users: action.users }
+        case 'SET_FILTERED':
+            return { ...state, filteredUsers: action.users }
         case 'REMOVE_USER':
             users = state.users.filter(user => user.userId !== action.userId)
             return { ...state, users }

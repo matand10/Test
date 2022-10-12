@@ -12,6 +12,18 @@ export function loadUsers(currentPage) {
     }
 }
 
+export function setFilteredUsers(users) {
+    return async dispatch => {
+        try {
+            dispatch({ type: 'SET_FILTERED', users })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+
+
 export function removeUser(userId) {
     return async dispatch => {
         try {

@@ -1,25 +1,16 @@
+import { Search } from './search'
 import './actions.scss'
-import { AiOutlineSearch } from 'react-icons/ai'
-
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 
 
 
 export const Actions = (props) => {
-    const { } = props
+    const { users } = props
 
     return (
         <section className="actions-container">
-            <Search />
-        </section>
-    )
-}
-
-const Search = () => {
-
-    return (
-        <section className="search-container">
-            <span><AiOutlineSearch /></span>
-            <input type="text" placeholder="Search something" />
+            <Search users={users} />
+            <button className="plus-btn"><AiOutlinePlusCircle /></button>
         </section>
     )
 }
