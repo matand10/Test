@@ -1,0 +1,14 @@
+$color1: #fafafa;
+$color2: #F67E7E;
+$color3: #ffffff;
+$color3: #ffffff;
+
+$layoutPadding: 20px;
+
+$break-narrow: 700px;
+$break-normal: 1020px;
+$break-wide: 1500px;
+
+$padded-break-narrow: $break-narrow + $layoutPadding * 2;
+$padded-break-normal: $break-normal + $layoutPadding * 2;
+$padded-break-wide: $break-wide + $layoutPadding * 2;

@@ -1,0 +1,21 @@
+.table-from-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    
+    form {
+        width: 500px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        
+        &>* {
+            margin: 10px;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
