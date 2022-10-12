@@ -44,6 +44,10 @@ input:focus {
     outline: none;
 }
 
+input::placeholder {
+    color: #E0E0E0;
+}
+
 textarea:active,
 textarea:focus {
     outline: none;
@@ -54,6 +58,7 @@ button {
     cursor: pointer;
 }
 
-input::placeholder {
-    color: #E0E0E0;
+input {
+    height: 30px;
+    padding: 0 10px;
 }

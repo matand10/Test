@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useExpanded } from 'react-table'
 import { itemService } from "../services/item.service";
-import MOCK_DATA from '../data/data.json'
-import { subRowColumn } from '../config/columns'
+import { BiTrash } from 'react-icons/bi'
 
 const Table = (props) => {
-    const { columns, data, onDeleteUser, onTableRow } = props
-
-
+    const { columns, data, onDeleteUser } = props
 
     const onRowDelete = (user) => {
         onDeleteUser(user.userId)
@@ -143,7 +140,7 @@ const RowPreview = (props) => {
                         </td>
                     )
                 })}
-                <td><button onClick={() => onRowDelete(row.original)}>Delete</button></td>
+                <td><button onClick={() => onRowDelete(row.original)}><BiTrash /></button></td>
             </tr>
             <tr>
                 {isExpanded && <td colSpan={8}>{<SubRowTable accounts={accounts} />}</td>}

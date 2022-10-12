@@ -28,21 +28,21 @@ const inputs = [
     },
     {
         id: 5,
-        label: 'Last Login',
-        name: 'lastLoginDate',
-        type: 'date',
-    },
-    {
-        id: 6,
         label: 'Organization',
         name: 'organizationCode',
         type: 'text',
     },
     {
-        id: 7,
+        id: 6,
         label: 'Status',
         name: 'status',
         type: 'text',
+    },
+    {
+        id: 7,
+        label: 'Last Login',
+        name: 'lastLoginDate',
+        type: 'date',
     },
 ]
 
@@ -84,7 +84,7 @@ export const Form = (props) => {
                     )
                 })}
 
-                <button>Submit</button>
+                <button className="submit-btn">Submit</button>
             </form>
         </section>
     )

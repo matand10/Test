@@ -10,6 +10,7 @@ import { ExpandableTable } from "../cmps/ExpandableTable"
 import { Form } from "../cmps/form/form"
 import { TableBtns } from "../cmps/table-btns/table-btns"
 import { Actions } from "../cmps/actions/actions"
+import { Modal } from "../cmps/modal/modal"
 
 
 
@@ -36,7 +37,7 @@ export const Homepage = () => {
             <Actions users={users} />
             <ExpandableTable columns={COLUMNS} data={data} onDeleteUser={onDeleteUser} />
             <TableBtns setCurrentPage={setCurrentPage} currentPage={currentPage} />
-            <Form onAddUser={onAddUser} />
+            <Modal onAddUser={onAddUser} />
         </section>
     )
 }
