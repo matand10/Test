@@ -1,19 +1,34 @@
-.pagination-btns {
+.pagination-btns-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     margin: 20px;
 
-    button {
+    .page-btns {
         height: 40px;
         width: 20px;
         padding: 0 10px;
-        background-color: #04AA6D;
         color: #fff;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+
+
+        button.disabled {
+            background-color: aqua;
+
+        }
     }
+}
+
+.disabled {
+    background-color: #04AA6D;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.activated {
+    background-color: #04AA6D;
 }

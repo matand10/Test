@@ -49,7 +49,6 @@ export const COLUMNS = [
             {
                 Header: 'Last Login',
                 accessor: 'lastLoginDate',
-                isSorting: true
             },
             {
                 Header: 'Organization',

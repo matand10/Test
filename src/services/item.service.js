@@ -82,18 +82,21 @@ function onDragRow(list, startIdx, endIdx) {
 
 function sortRows(sortBy, rows) {
     let data = [...rows]
+    if (!sortBy.reverse) sortBy.reverse = false
     if (sortBy.id === 'userId') {
-        return data.sort((a, b) => a.userId - b.userId)
+        data = data.sort((a, b) => a.userId - b.userId)
+        sortBy.reverse = !sortBy.reverse
     } else if (sortBy.id === 'firstName' ||
         sortBy.id === 'lastName' ||
         sortBy.id === 'organizationCode') {
         const { id } = sortBy
-        return data.sort((a, b) => {
-            if (a[id] < b[id]) return -1
-            else if (a[id] > b[id]) return 1
-            else return 0
+        data = data.sort((a, b) => {
+            return a[id] > b[id] ? 1 : ((b[id] > a[id]) ? -1 : 0)
         })
+        sortBy.reverse = !sortBy.reverse
     }
+    if (!sortBy.reverse) return data.reverse()
+    else return data
 }
 
 
