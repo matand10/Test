@@ -16,6 +16,7 @@ export const Actions = (props) => {
         <section className="actions-container">
             <Search users={users} />
             <button onClick={openModal} className="plus-btn"><AiOutlinePlusCircle /></button>
+            <button onClick={() => window.location.reload()}> Reload Page</button>
         </section>
     )
 }

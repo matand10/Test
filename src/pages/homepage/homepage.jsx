@@ -11,6 +11,7 @@ import { Actions } from "../../cmps/actions/actions"
 import { Modal } from "../../cmps/modal/modal"
 
 import './homepage.scss'
+import { NoData } from "../../cmps/animations/no-data"
 
 export const Homepage = () => {
     const { users, filteredUsers } = useSelector((storeState) => storeState.itemModule)
@@ -19,7 +20,15 @@ export const Homepage = () => {
 
     useEffect(() => {
         dispatch(loadUsers(currentPage))
+        // refreshData()
     }, [currentPage, filteredUsers])
+
+    const refreshData = () => {
+        setTimeout(() => {
+            window.location.reload()
+            refreshData()
+        }, (1000 * 60) * 3)
+    }
 
     const onDeleteUser = (userId) => {
         dispatch(removeUser(userId))
@@ -34,8 +43,14 @@ export const Homepage = () => {
     return (
         <section className="homepage-container">
             <Actions users={users} />
-            <ExpandableTable columns={COLUMNS} data={data} onDeleteUser={onDeleteUser} />
-            <TableBtns setCurrentPage={setCurrentPage} currentPage={currentPage} />
+            {data ?
+                <>
+                    <ExpandableTable columns={COLUMNS} data={data} onDeleteUser={onDeleteUser} />
+                    <TableBtns setCurrentPage={setCurrentPage} currentPage={currentPage} />
+                </>
+                :
+                <NoData />
+            }
             <Modal onAddUser={onAddUser} />
         </section>
     )

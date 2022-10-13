@@ -56,6 +56,19 @@ export const COLUMNS = [
                 accessor: 'organizationCode'
             }
         ]
+    },
+    {
+        Header: 'Actions',
+        columns: [
+            {
+                Header: 'Delete',
+                accessor: 'delete'
+            },
+            {
+                Header: 'Update',
+                accessor: 'update'
+            },
+        ]
     }
 ]
 
