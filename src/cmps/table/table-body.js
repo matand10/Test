@@ -7,7 +7,7 @@ export const TableBody = (props) => {
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
+            <Droppable droppableId="droppable" type="droppableGroup">
                 {(provided, snapshot) => (
                     <tbody
                         {...provided.droppableProps}

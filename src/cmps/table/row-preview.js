@@ -5,7 +5,7 @@ import { CellPreview } from "./cell-preview"
 import { SubTable } from "./sub-table"
 
 export const RowPreview = (props) => {
-    const { row, onRowDelete, provided, onRowEdit, headerGroups } = props
+    const { row, onRowDelete, provided, onRowEdit, headerGroups, snapshot } = props
     const [accounts, setAccouts] = useState([])
     const [isExpanded, setIsExpanded] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
@@ -26,7 +26,8 @@ export const RowPreview = (props) => {
     }
 
     const selectedRowStyle = {
-        backgroundColor: isExpanded ? '#b7e4ff' : ''
+        backgroundColor: isExpanded ? '#b7e4ff' : '',
+        width: '300px'
     }
 
     return (

@@ -16,9 +16,6 @@ body {
     background-color: $color1;
 }
 
-.main-container {
-    min-height: calc(100vh - 322px);
-}
 
 h1,
 h2,
@@ -35,7 +32,6 @@ img {
     object-fit: contain;
 }
 
-p {}
 
 input:active,
 input:focus {

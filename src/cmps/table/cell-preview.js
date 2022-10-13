@@ -15,18 +15,18 @@ export const CellPreview = (props) => {
         else res = <BsArrowRightCircle />
     }
     else {
-        if (cell.column.Header === 'Delete') res = <BiTrash onClick={(ev) => {
+        if (cell.column.Header === 'Delete') res = <span className="table-action-btn"> <BiTrash onClick={(ev) => {
             ev.stopPropagation()
             onRowDelete(row.original)
-        }} />
-        else if (cell.column.Header === 'Update') res = <FiEdit onClick={(ev) => {
+        }} /></span>
+        else if (cell.column.Header === 'Update') res = <span className="table-action-btn"><FiEdit onClick={(ev) => {
             ev.stopPropagation()
             onRowEdit(row.original)
-        }} />
-        else res = <HiOutlineDotsHorizontal onClick={(ev) => {
+        }} /></span>
+        else res = <span className="table-action-btn"><HiOutlineDotsHorizontal onClick={(ev) => {
             ev.stopPropagation()
             setIsOpen(true)
-        }} />
+        }} /></span>
     }
 
 

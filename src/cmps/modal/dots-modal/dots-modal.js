@@ -2,7 +2,7 @@ import './dots-modal.scss'
 import { GrTransaction } from 'react-icons/gr'
 import { FaMoneyBill } from 'react-icons/fa'
 import { GiExpense } from 'react-icons/gi'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 export const DotsModal = (props) => {
     const { setIsOpen } = props
@@ -23,19 +23,22 @@ export const DotsModal = (props) => {
 
 
     return (
-        <tr className="dots-modal-container" ref={menuRef}>
-            <td>
-                <span><GrTransaction /></span>
-                <h4>Transactions</h4>
-            </td>
-            <td>
-                <span><FaMoneyBill /></span>
-                <h4>Income</h4>
-            </td>
-            <td>
-                <span><GiExpense /></span>
-                <h4>Expenses</h4>
-            </td>
-        </tr>
+        <React.Fragment>
+
+            <tr className="dots-modal-container" ref={menuRef}>
+                <td>
+                    <span><GrTransaction /></span>
+                    <h4>Transactions</h4>
+                </td>
+                <td>
+                    <span><FaMoneyBill /></span>
+                    <h4>Income</h4>
+                </td>
+                <td>
+                    <span><GiExpense /></span>
+                    <h4>Expenses</h4>
+                </td>
+            </tr>
+        </React.Fragment>
     )
 }
