@@ -23,22 +23,20 @@ export const DotsModal = (props) => {
 
 
     return (
-        <React.Fragment>
 
-            <tr className="dots-modal-container" ref={menuRef}>
-                <td>
-                    <span><GrTransaction /></span>
-                    <h4>Transactions</h4>
-                </td>
-                <td>
-                    <span><FaMoneyBill /></span>
-                    <h4>Income</h4>
-                </td>
-                <td>
-                    <span><GiExpense /></span>
-                    <h4>Expenses</h4>
-                </td>
-            </tr>
-        </React.Fragment>
+        <tr className="dots-modal-container" ref={menuRef}>
+            <td>
+                <span><GrTransaction /></span>
+                <h4>Transactions</h4>
+            </td>
+            <td>
+                <span><FaMoneyBill /></span>
+                <h4>Income</h4>
+            </td>
+            <td>
+                <span><GiExpense /></span>
+                <h4>Expenses</h4>
+            </td>
+        </tr>
     )
 }
