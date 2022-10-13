@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { lottieService } from "../../services/animation.service"
-import loading from '../../assets/lottie/loading/loader.json'
+import loading from '../../assets/lottie/loader.json'
 import './animations.scss'
 
 export const Loader = () => {

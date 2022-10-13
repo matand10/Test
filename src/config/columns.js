@@ -1,9 +1,12 @@
+import { BsArrowDownRightCircle } from 'react-icons/bs'
+import { BsArrowRightCircle } from 'react-icons/bs'
+
 export const COLUMNS = [
     {
         id: 'expander',
         Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
             <span {...getToggleAllRowsExpandedProps()}>
-                {isAllRowsExpanded ? '👇' : '👉'}
+                {isAllRowsExpanded ? <BsArrowDownRightCircle /> : <BsArrowRightCircle />}
             </span>
         ),
         Cell: ({ row }) =>
@@ -15,7 +18,7 @@ export const COLUMNS = [
                     },
                 })}
             >
-                {row.isExpanded ? '👇' : '👉'}
+                {row.isExpanded ? <BsArrowDownRightCircle /> : <BsArrowRightCircle />}
             </span>
         )
     },

@@ -12,7 +12,7 @@ import { TableBody } from "./table-body";
 import { TableFoot } from "./table-foot";
 import { Loader } from "../animations/loader";
 
-
+import './_table.scss'
 
 
 

@@ -8,10 +8,10 @@ export const TableHead = (props) => {
             {headerGroups.map((headerGroup, idx) => {
                 return (
                     <React.Fragment key={idx}>
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr {...headerGroup.getHeaderGroupProps()} className={``}>
                             {headerGroup.headers.map(column => {
                                 return (
-                                    <th {...column.getHeaderProps()} onClick={() => (
+                                    <th id={`${column.isSorting ? 'pressable' : ''}`} {...column.getHeaderProps()} onClick={() => (
                                         column.isSorting ? onSortTable(column) : null
                                     )}>{column.render('Header')}</th>
                                 )
