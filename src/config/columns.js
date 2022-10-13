@@ -24,15 +24,18 @@ export const COLUMNS = [
         columns: [
             {
                 Header: 'Id',
-                accessor: 'userId'
+                accessor: 'userId',
+                isSorting: true
             },
             {
                 Header: 'First Name',
                 accessor: 'firstName',
+                isSorting: true
             },
             {
                 Header: 'Last Name',
                 accessor: 'lastName',
+                isSorting: true
             },
         ],
     },
@@ -45,7 +48,8 @@ export const COLUMNS = [
             },
             {
                 Header: 'Last Login',
-                accessor: 'lastLoginDate'
+                accessor: 'lastLoginDate',
+                isSorting: true
             },
             {
                 Header: 'Organization',

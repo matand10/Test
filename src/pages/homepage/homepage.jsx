@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { loadUsers, removeUser, saveUser } from "../store/item/item.action"
+import { loadUsers, removeUser, saveUser } from "../../store/item/item.action"
+
+import { COLUMNS } from '../../config/columns'
 
 
-import { COLUMNS } from '../config/columns'
+import { ExpandableTable } from "../../cmps/ExpandableTable"
+import { TableBtns } from "../../cmps/table-btns/table-btns"
+import { Actions } from "../../cmps/actions/actions"
+import { Modal } from "../../cmps/modal/modal"
 
-
-import { ExpandableTable } from "../cmps/ExpandableTable"
-import { Form } from "../cmps/form/form"
-import { TableBtns } from "../cmps/table-btns/table-btns"
-import { Actions } from "../cmps/actions/actions"
-import { Modal } from "../cmps/modal/modal"
-
-
+import './homepage.scss'
 
 export const Homepage = () => {
     const { users, filteredUsers } = useSelector((storeState) => storeState.itemModule)
@@ -32,6 +30,7 @@ export const Homepage = () => {
     }
 
     const data = filteredUsers.length ? filteredUsers : users
+
     return (
         <section className="homepage-container">
             <Actions users={users} />
@@ -41,7 +40,6 @@ export const Homepage = () => {
         </section>
     )
 }
-
 
 
 
