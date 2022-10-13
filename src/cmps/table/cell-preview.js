@@ -27,9 +27,12 @@ export const CellPreview = (props) => {
         }} />
     }
 
+
     return (
         <td
             style={selectedRowStyle}
+            // IF we want to color row by conditions
+            // className={`${row.original.firstName === 'Gilad' ? 'mark' : ''}`}
             {...cell.getCellProps()}>
             {res}
         </td>

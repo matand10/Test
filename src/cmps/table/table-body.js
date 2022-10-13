@@ -1,3 +1,4 @@
+import React from "react"
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 import { RowPreview } from "./row-preview"
 
@@ -15,21 +16,18 @@ export const TableBody = (props) => {
                     >
                         {rows.map((row, index) => {
                             prepareRow(row)
-                            return (
-                                <Draggable key={row.index} draggableId={row.id.toString()} index={index}>
-                                    {(provided, snapshot) => (
-                                        <>
-                                            <RowPreview row={row}
-                                                onRowEdit={onRowEdit}
-                                                onRowDelete={onRowDelete}
-                                                provided={provided}
-                                                snapshot={snapshot}
-                                                headerGroups={headerGroups} />
-                                        </>
-                                    )}
+                            return <Draggable key={row.id} draggableId={row.id} index={index}>
+                                {(provided, snapshot) => (
+                                    <RowPreview
+                                        row={row}
+                                        onRowEdit={onRowEdit}
+                                        onRowDelete={onRowDelete}
+                                        provided={provided}
+                                        snapshot={snapshot}
+                                        headerGroups={headerGroups} />
+                                )}
 
-                                </Draggable>
-                            )
+                            </Draggable>
                         })}
                         {provided.placeholder}
                     </tbody>

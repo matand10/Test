@@ -29,7 +29,6 @@ export const RowPreview = (props) => {
         backgroundColor: isExpanded ? '#b7e4ff' : ''
     }
 
-
     return (
         <React.Fragment>
             <tr
@@ -38,9 +37,9 @@ export const RowPreview = (props) => {
                 {...provided.dragHandleProps}
                 {...row.getRowProps()} onClick={() => onSelectRow(row)}
                 className="row-container">
-                {row.cells.map(cell => {
+                {row.cells.map((cell, idx) => {
                     return (
-                        <CellPreview cell={cell} row={row} onRowDelete={onRowDelete} selectedRowStyle={selectedRowStyle} onRowEdit={onRowEdit} setIsOpen={setIsOpen} />
+                        <CellPreview key={idx} cell={cell} row={row} onRowDelete={onRowDelete} selectedRowStyle={selectedRowStyle} onRowEdit={onRowEdit} setIsOpen={setIsOpen} />
                     )
                 })}
             </tr>

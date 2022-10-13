@@ -7,8 +7,9 @@ import { itemService } from "../../services/item.service";
 import { setUsers } from "../../store/item/item.action";
 
 
-import { TableBody } from "./table-body";
 import { TableHead } from "./table-head";
+import { TableBody } from "./table-body";
+import { TableFoot } from "./table-foot";
 import { Loader } from "../animations/loader";
 
 
@@ -81,24 +82,18 @@ const Table = (props) => {
     )
 
     return (
-        <div>
-            <table className="table" {...getTableProps()}>
-                <TableHead headerGroups={headerGroups} onSortTable={onSortTable} />
-                <TableBody
-                    rows={rows}
-                    onRowDelete={onRowDelete}
-                    onDragEnd={onDragEnd}
-                    getTableBodyProps={getTableBodyProps}
-                    prepareRow={prepareRow}
-                    onRowEdit={onRowEdit}
-                    headerGroups={headerGroups} />
-                <tfoot>
-                    <tr>
-                        <td colSpan={headerGroups[1].headers.length}>{data.length} Rows</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div >
+        <table className="table" {...getTableProps()}>
+            <TableHead headerGroups={headerGroups} onSortTable={onSortTable} />
+            <TableBody
+                rows={rows}
+                onRowDelete={onRowDelete}
+                onDragEnd={onDragEnd}
+                getTableBodyProps={getTableBodyProps}
+                prepareRow={prepareRow}
+                onRowEdit={onRowEdit}
+                headerGroups={headerGroups} />
+            <TableFoot headerGroups={headerGroups} data={data} />
+        </table>
     )
 }
 
