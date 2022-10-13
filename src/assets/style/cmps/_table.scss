@@ -23,10 +23,14 @@ table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-table tr:hover {
+.row-container:hover {
   background-color: #ddd;
 }
 
 .nested {
-  table-layout:fixed;
+  table-layout: fixed;
+}
+
+.row-container {
+  position: relative;
 }

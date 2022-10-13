@@ -68,6 +68,10 @@ export const COLUMNS = [
                 Header: 'Update',
                 accessor: 'update'
             },
+            {
+                Header: 'Menu',
+                accessor: 'menu'
+            },
         ]
     }
 ]

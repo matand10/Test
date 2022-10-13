@@ -90,10 +90,11 @@ const Table = (props) => {
                     onDragEnd={onDragEnd}
                     getTableBodyProps={getTableBodyProps}
                     prepareRow={prepareRow}
-                    onRowEdit={onRowEdit} />
+                    onRowEdit={onRowEdit}
+                    headerGroups={headerGroups} />
                 <tfoot>
                     <tr>
-                        <td colSpan={headerGroups[1].headers.length + 1}>{data.length} Rows</td>
+                        <td colSpan={headerGroups[1].headers.length}>{data.length} Rows</td>
                     </tr>
                 </tfoot>
             </table>

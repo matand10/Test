@@ -2,7 +2,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 import { RowPreview } from "./row-preview"
 
 export const TableBody = (props) => {
-    const { rows, onRowDelete, onDragEnd, getTableBodyProps, prepareRow, onRowEdit } = props
+    const { rows, onRowDelete, onDragEnd, getTableBodyProps, prepareRow, onRowEdit, headerGroups } = props
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
@@ -21,8 +21,10 @@ export const TableBody = (props) => {
                                         <>
                                             <RowPreview row={row}
                                                 onRowEdit={onRowEdit}
-                                                onRowDelete={onRowDelete} provided={provided}
-                                                snapshot={snapshot} />
+                                                onRowDelete={onRowDelete}
+                                                provided={provided}
+                                                snapshot={snapshot}
+                                                headerGroups={headerGroups} />
                                         </>
                                     )}
 

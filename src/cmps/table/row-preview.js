@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { itemService } from "../../services/item.service"
+import { DotsModal } from "../modal/dots-modal/dots-modal"
 import { CellPreview } from "./cell-preview"
 import { SubTable } from "./sub-table"
 
 export const RowPreview = (props) => {
-    const { row, onRowDelete, provided, onRowEdit } = props
+    const { row, onRowDelete, provided, onRowEdit, headerGroups } = props
     const [accounts, setAccouts] = useState([])
     const [isExpanded, setIsExpanded] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         row.isExpanded = isExpanded
@@ -27,6 +29,7 @@ export const RowPreview = (props) => {
         backgroundColor: isExpanded ? '#b7e4ff' : ''
     }
 
+
     return (
         <React.Fragment>
             <tr
@@ -34,16 +37,19 @@ export const RowPreview = (props) => {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 {...row.getRowProps()} onClick={() => onSelectRow(row)}
-            >
+                className="row-container">
                 {row.cells.map(cell => {
                     return (
-                        <CellPreview cell={cell} row={row} onRowDelete={onRowDelete} selectedRowStyle={selectedRowStyle} onRowEdit={onRowEdit} />
+                        <CellPreview cell={cell} row={row} onRowDelete={onRowDelete} selectedRowStyle={selectedRowStyle} onRowEdit={onRowEdit} setIsOpen={setIsOpen} />
                     )
                 })}
             </tr>
             {isExpanded && <tr>
-                <td colSpan="9">{<SubTable accounts={accounts} />}</td>
+                <td colSpan={headerGroups[1].headers.length}>{<SubTable accounts={accounts} />}</td>
             </tr>}
+
+            {isOpen && <DotsModal setIsOpen={setIsOpen} />}
         </React.Fragment>
     )
 }
+

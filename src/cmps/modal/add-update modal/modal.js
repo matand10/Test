@@ -1,5 +1,5 @@
 import './modal.scss'
-import { Form } from '../form/form'
+import { Form } from '../../form/form'
 
 export const Modal = (props) => {
     const { onAddUser, setEditMode, editMode } = props

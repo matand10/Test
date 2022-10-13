@@ -8,7 +8,7 @@ import { COLUMNS } from '../../config/columns'
 import { ExpandableTable } from "../../cmps/table/ExpandableTable"
 import { TableBtns } from "../../cmps/table-btns/table-btns"
 import { Actions } from "../../cmps/actions/actions"
-import { Modal } from "../../cmps/modal/modal"
+import { Modal } from "../../cmps/modal/add-update modal/modal"
 
 import './homepage.scss'
 import { NoData } from "../../cmps/animations/no-data"

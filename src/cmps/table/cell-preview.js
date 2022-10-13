@@ -1,9 +1,10 @@
 import { BiTrash } from 'react-icons/bi'
 import { FiEdit } from 'react-icons/fi'
+import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 
 
 export const CellPreview = (props) => {
-    const { cell, row, onRowDelete, selectedRowStyle, onRowEdit } = props
+    const { cell, row, onRowDelete, selectedRowStyle, onRowEdit, setIsOpen } = props
 
     let res
     if (cell.value) res = cell.render('Cell')
@@ -19,6 +20,10 @@ export const CellPreview = (props) => {
         else if (cell.column.Header === 'Update') res = <FiEdit onClick={(ev) => {
             ev.stopPropagation()
             onRowEdit(row.original)
+        }} />
+        else res = <HiOutlineDotsHorizontal onClick={(ev) => {
+            ev.stopPropagation()
+            setIsOpen(true)
         }} />
     }
 
