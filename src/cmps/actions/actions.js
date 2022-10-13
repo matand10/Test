@@ -5,11 +5,10 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 
 
 export const Actions = (props) => {
-    const { users } = props
+    const { users, setEditMode } = props
 
     const openModal = () => {
-        const elModal = document.querySelector('.modal')
-        elModal.style.display = 'block'
+        setEditMode((prevState) => ({ ...prevState, user: {} }))
     }
 
     return (

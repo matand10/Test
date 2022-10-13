@@ -1,4 +1,5 @@
 import { httpService } from './http.service'
+import { utilService } from './util.service'
 
 
 const ACCOUNTS_KEY = 'admin_get_user_accounts'
@@ -10,6 +11,8 @@ export const itemService = {
     getUserAccounts,
     save,
     remove,
+    edit,
+    createUser,
     sortRows,
     onDragRow
 }
@@ -35,15 +38,40 @@ async function getUserAccounts(userId) {
 }
 
 
-async function remove(userId) {
+function remove(userId) {
     console.log('Removing user with ID: ', userId)
 }
 
 
-async function save(user) {
-    console.log('Saving user with ID: ', user.userId)
+function save(user) {
+    if (user.userId) {
+        console.log('Editing user with ID: ', user.userId)
+    } else {
+        user.userId = utilService.makeId()
+        console.log('Saving user with ID: ', user.userId)
+    }
+    return user
 }
 
+
+function edit(user) {
+    console.log('Editing user with ID: ', user.userId)
+}
+
+function createUser(user) {
+    if (!user.userId) {
+        return {
+            firstName: '',
+            lastName: '',
+            lastLoginDate: '',
+            email: '',
+            organizationCode: '',
+            status: '',
+        }
+    } else {
+        return user
+    }
+}
 
 function onDragRow(list, startIdx, endIdx) {
     const res = Array.from(list)

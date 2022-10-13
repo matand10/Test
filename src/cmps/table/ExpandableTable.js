@@ -3,13 +3,13 @@ import { useTable, useExpanded } from 'react-table'
 import { useDispatch } from "react-redux";
 
 
-import { itemService } from "../services/item.service";
-import { setUsers } from "../store/item/item.action";
+import { itemService } from "../../services/item.service";
+import { setUsers } from "../../store/item/item.action";
 
 
-import { TableBody } from "./table/table-body";
-import { TableHead } from "./table/table-head";
-import { Loader } from "./animations/loader";
+import { TableBody } from "./table-body";
+import { TableHead } from "./table-head";
+import { Loader } from "../animations/loader";
 
 
 
@@ -17,7 +17,7 @@ import { Loader } from "./animations/loader";
 
 export const ExpandableTable = (props) => {
     const columns = React.useMemo(() => props.columns, [])
-    let { data, onDeleteUser } = props
+    let { data, onDeleteUser, onEditUser } = props
     const [tableData, setTableData] = useState([])
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch()
@@ -32,7 +32,14 @@ export const ExpandableTable = (props) => {
         dispatch(setUsers(sortedRows))
     }
 
-    if (!loading) return <Table columns={columns} data={tableData} onDeleteUser={onDeleteUser} onSortTable={onSortTable} />
+    const onRowEdit = (user) => {
+        onEditUser(user)
+    }
+
+    if (!loading) return (
+        <Table columns={columns} data={tableData}
+            onDeleteUser={onDeleteUser} onSortTable={onSortTable} onRowEdit={onRowEdit} />
+    )
     else return <Loader />
 }
 
@@ -42,7 +49,7 @@ export const ExpandableTable = (props) => {
 
 
 const Table = (props) => {
-    const { columns, data, onDeleteUser, onSortTable } = props
+    const { columns, data, onDeleteUser, onSortTable, onRowEdit } = props
     const dispatch = useDispatch()
 
     const onRowDelete = (user) => {
@@ -82,7 +89,8 @@ const Table = (props) => {
                     onRowDelete={onRowDelete}
                     onDragEnd={onDragEnd}
                     getTableBodyProps={getTableBodyProps}
-                    prepareRow={prepareRow} />
+                    prepareRow={prepareRow}
+                    onRowEdit={onRowEdit} />
                 <tfoot>
                     <tr>
                         <td colSpan={headerGroups[1].headers.length + 1}>{data.length} Rows</td>

@@ -1,8 +1,9 @@
 import { BiTrash } from 'react-icons/bi'
+import { FiEdit } from 'react-icons/fi'
 
 
 export const CellPreview = (props) => {
-    const { cell, row, onRowDelete, selectedRowStyle } = props
+    const { cell, row, onRowDelete, selectedRowStyle, onRowEdit } = props
 
     let res
     if (cell.value) res = cell.render('Cell')
@@ -10,15 +11,19 @@ export const CellPreview = (props) => {
         if (row.isExpanded) res = '👇'
         else res = '👉'
     }
-    else res = <BiTrash />
+    else {
+        if (cell.column.Header === 'Delete') res = <BiTrash onClick={(ev) => {
+            ev.stopPropagation()
+            onRowDelete(row.original)
+        }} />
+        else if (cell.column.Header === 'Update') res = <FiEdit onClick={(ev) => {
+            ev.stopPropagation()
+            onRowEdit(row.original)
+        }} />
+    }
 
     return (
-        <td onClick={(ev) => {
-            if (!cell.value) {
-                ev.stopPropagation()
-                onRowDelete(row.original)
-            }
-        }}
+        <td
             style={selectedRowStyle}
             {...cell.getCellProps()}>
             {res}

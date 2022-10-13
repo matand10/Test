@@ -1,12 +1,11 @@
 const initialState = {
     users: [],
-    user: {},
+    user: null,
     userAccounts: [],
     filteredUsers: []
 }
 
 export function itemReducer(state = initialState, action) {
-    let items
     let users
 
     switch (action.type) {
@@ -19,7 +18,11 @@ export function itemReducer(state = initialState, action) {
             return { ...state, users }
         case 'ADD_USER':
             users = [action.user, ...state.users]
-            return { ...state, items }
+            return { ...state, users }
+        case 'UPDATE_USER':
+            users = state.users.map(currUser =>
+                (currUser.userId === action.user.userId) ? { ...action.user } : currUser)
+            return { ...state, users: users }
         default:
             return state
     }

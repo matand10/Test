@@ -50,11 +50,11 @@ export function removeUser(userId) {
 export function saveUser(user) {
     return async dispatch => {
         try {
-            await itemService.save(user)
-            dispatch({ type: 'ADD_USER', item: user })
+            const actionType = user.userId ? 'UPDATE_USER' : 'ADD_USER'
+            const savedUser = itemService.save(user)
+            dispatch({ type: actionType, user: savedUser })
         } catch (err) {
             console.log(err)
         }
     }
 }
-

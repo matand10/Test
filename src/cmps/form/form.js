@@ -1,45 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { itemService } from '../../services/item.service'
 import './form.scss'
 
 const inputs = [
     {
         id: 1,
-        label: 'ID',
-        name: 'userId',
-        type: 'text',
-    },
-    {
-        id: 2,
         label: 'First Name',
         name: 'firstName',
         type: 'text',
     },
     {
-        id: 3,
+        id: 2,
         label: 'Last Name',
         name: 'lastName',
         type: 'text',
     },
     {
-        id: 4,
+        id: 3,
         label: 'Email',
         name: 'email',
         type: 'email',
     },
     {
-        id: 5,
+        id: 4,
         label: 'Organization',
         name: 'organizationCode',
         type: 'text',
     },
     {
-        id: 6,
+        id: 5,
         label: 'Status',
         name: 'status',
         type: 'text',
     },
     {
-        id: 7,
+        id: 6,
         label: 'Last Login',
         name: 'lastLoginDate',
         type: 'date',
@@ -48,18 +43,13 @@ const inputs = [
 
 
 export const Form = (props) => {
-    const { onAddUser } = props
-    const [user, setUser] = useState(() => (
-        {
-            userId: '',
-            status: '',
-            firstName: '',
-            lastName: '',
-            organizationCode: '',
-            lastLoginDate: '',
-            email: ''
-        }
-    ))
+    const { onAddUser, editMode, setEditMode } = props
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        const newUser = itemService.createUser(editMode.user)
+        setUser(newUser)
+    }, [])
 
     const handleType = ({ target }) => {
         const { value } = target
@@ -70,6 +60,7 @@ export const Form = (props) => {
     const onSubmitForm = (ev) => {
         ev.preventDefault()
         onAddUser(user)
+        setEditMode({})
     }
 
     return (
@@ -79,7 +70,7 @@ export const Form = (props) => {
                     return (
                         <div key={input.id}>
                             <label>{input.label}</label>
-                            <input type={input.type} placeholder={input.label} name={input.name} onChange={handleType} />
+                            <input type={input.type} placeholder={input.label} name={input.name} onChange={handleType} defaultValue={user[input.name]} />
                         </div>
                     )
                 })}

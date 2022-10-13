@@ -4,7 +4,7 @@ import { CellPreview } from "./cell-preview"
 import { SubTable } from "./sub-table"
 
 export const RowPreview = (props) => {
-    const { row, onRowDelete, provided } = props
+    const { row, onRowDelete, provided, onRowEdit } = props
     const [accounts, setAccouts] = useState([])
     const [isExpanded, setIsExpanded] = useState(false)
 
@@ -37,7 +37,7 @@ export const RowPreview = (props) => {
             >
                 {row.cells.map(cell => {
                     return (
-                        <CellPreview cell={cell} row={row} onRowDelete={onRowDelete} selectedRowStyle={selectedRowStyle} />
+                        <CellPreview cell={cell} row={row} onRowDelete={onRowDelete} selectedRowStyle={selectedRowStyle} onRowEdit={onRowEdit} />
                     )
                 })}
             </tr>

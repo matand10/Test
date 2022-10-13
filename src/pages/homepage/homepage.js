@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { loadUsers, removeUser, saveUser } from "../../store/item/item.action"
+import { editUser, loadUsers, removeUser, saveUser } from "../../store/item/item.action"
 
 import { COLUMNS } from '../../config/columns'
 
 
-import { ExpandableTable } from "../../cmps/ExpandableTable"
+import { ExpandableTable } from "../../cmps/table/ExpandableTable"
 import { TableBtns } from "../../cmps/table-btns/table-btns"
 import { Actions } from "../../cmps/actions/actions"
 import { Modal } from "../../cmps/modal/modal"
@@ -14,9 +14,10 @@ import './homepage.scss'
 import { NoData } from "../../cmps/animations/no-data"
 
 export const Homepage = () => {
-    const { users, filteredUsers } = useSelector((storeState) => storeState.itemModule)
+    const { users, filteredUsers, user } = useSelector((storeState) => storeState.itemModule)
     const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState(1)
+    const [editMode, setEditMode] = useState({})
 
     useEffect(() => {
         dispatch(loadUsers(currentPage))
@@ -38,20 +39,24 @@ export const Homepage = () => {
         dispatch(saveUser(user))
     }
 
+    const onEditUser = (user) => {
+        setEditMode((prevState) => ({ ...prevState, user }))
+    }
+
     const data = filteredUsers.length ? filteredUsers : users
 
     return (
         <section className="homepage-container">
-            <Actions users={users} />
+            <Actions users={users} setEditMode={setEditMode} />
             {data ?
                 <>
-                    <ExpandableTable columns={COLUMNS} data={data} onDeleteUser={onDeleteUser} />
+                    <ExpandableTable columns={COLUMNS} data={data} onDeleteUser={onDeleteUser} onEditUser={onEditUser} />
                     <TableBtns setCurrentPage={setCurrentPage} currentPage={currentPage} />
                 </>
                 :
                 <NoData />
             }
-            <Modal onAddUser={onAddUser} />
+            {editMode.user && <Modal onAddUser={onAddUser} setEditMode={setEditMode} editMode={editMode} />}
         </section>
     )
 }

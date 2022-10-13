@@ -1,4 +1,4 @@
-import { Homepage } from './pages/homepage/homepage.jsx'
+import { Homepage } from './pages/homepage/homepage.js'
 
 export const routes = [
     {
