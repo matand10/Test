@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { itemService } from "../../services/item.service"
+import { itemService } from "../../services/user.service"
 import { DotsModal } from "../modal/dots-modal/dots-modal"
 import { CellPreview } from "./cell-preview"
 import { SubTable } from "./sub-table"

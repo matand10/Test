@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { editUser, loadUsers, removeUser, saveUser } from "../../store/item/item.action"
+import { editUser, loadUsers, removeUser, saveUser } from "../../store/user/user.action"
 
 import { COLUMNS } from '../../config/columns'
 
@@ -14,7 +14,7 @@ import './homepage.scss'
 import { NoData } from "../../cmps/animations/no-data"
 
 export const Homepage = () => {
-    const { users, filteredUsers, user } = useSelector((storeState) => storeState.itemModule)
+    const { users, filteredUsers, user } = useSelector((storeState) => storeState.userModule)
     const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState(1)
     const [editMode, setEditMode] = useState({})

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { itemService } from '../../services/item.service'
+import { itemService } from '../../services/user.service'
 import './form.scss'
 
 const inputs = [

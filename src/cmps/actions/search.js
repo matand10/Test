@@ -1,7 +1,7 @@
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { utilService } from '../../services/util.service'
-import { setFilteredUsers } from '../../store/item/item.action'
+import { setFilteredUsers } from '../../store/user/user.action'
 
 export const Search = (props) => {
     const { users } = props

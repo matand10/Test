@@ -1,93 +1,118 @@
-import { storageService } from './async-storage.service'
-// import { httpService } from './http.service'
+import { httpService } from './http.service'
+import { utilService } from './util.service'
 
-const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
-export const userService = {
-    login,
-    logout,
-    signup,
-    getLoggedinUser,
-    saveLocalUser,
+
+const ACCOUNTS_KEY = 'admin_get_user_accounts'
+const ORGANIZATION_KEY = 'admin_get_organization_users'
+
+
+export const itemService = {
     getUsers,
-    getById,
+    getUserAccounts,
+    save,
     remove,
-    update,
+    edit,
+    createUser,
+    sortRows,
+    onDragRow
 }
 
-window.userService = userService
 
-
-function getUsers() {
+async function getUsers(currentPage) {
     try {
-        return storageService.query('user')
-        // return httpService.get(`user`)
+        const users = await httpService.post(ORGANIZATION_KEY, _getUsersJson(currentPage))
+        return users.list
     } catch (err) {
         throw err
     }
 }
 
-async function getById(userId) {
+
+async function getUserAccounts(userId) {
     try {
-        const user = await storageService.get('user', userId)
-        // const user = await httpService.get(`user/${userId}`)
-        // gWatchedUser = user;
-        return user
+        const accounts = await httpService.post(ACCOUNTS_KEY, _getAccountsJson(userId))
+        return accounts.list
     } catch (err) {
         throw err
     }
 }
 
-async function remove(userId) {
-    try {
-        return storageService.remove('user', userId)
-        // return httpService.delete(`user/${userId}`)
-    } catch (err) {
-        throw err
+
+function remove(userId) {
+    console.log('Removing user with ID: ', userId)
+}
+
+
+function save(user) {
+    if (user.userId) {
+        console.log('Editing user with ID: ', user.userId)
+    } else {
+        user.userId = utilService.makeId()
+        console.log('Saving user with ID: ', user.userId)
     }
-}
-
-async function update(user) {
-    try {
-        await storageService.put('user', user)
-        // user = await httpService.put(`user/${user._id}`, user)
-        if (getLoggedinUser()._id === user._id) saveLocalUser(user)
-        return user;
-    } catch (err) {
-        throw err
-    }
-}
-
-async function login(userCred) {
-    try {
-        const users = await storageService.query('user')
-        const user = users.find(user => user.username === userCred.username)
-        // const user = await httpService.post('auth/login', userCred)
-        if (user) return saveLocalUser(user)
-    } catch (err) {
-        throw err
-    }
-}
-
-async function signup(userCred) {
-    try {
-        const user = await storageService.post('user', userCred)
-        // const user = await httpService.post('auth/signup', userCred)
-        return saveLocalUser(user)
-    } catch (err) {
-        throw err
-    }
-}
-
-async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    // return await httpService.post('auth/logout')
-}
-
-function saveLocalUser(user) {
-    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
 
-function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+
+function edit(user) {
+    console.log('Editing user with ID: ', user.userId)
+}
+
+function createUser(user) {
+    if (!user.userId) {
+        return {
+            firstName: '',
+            lastName: '',
+            lastLoginDate: '',
+            email: '',
+            organizationCode: '',
+            status: '',
+        }
+    } else {
+        return user
+    }
+}
+
+function onDragRow(list, startIdx, endIdx) {
+    const res = Array.from(list)
+    const [removed] = res.splice(startIdx, 1)
+    res.splice(endIdx, 0, removed)
+    return res
+}
+
+function sortRows(sortBy, rows) {
+    let data = [...rows]
+    if (!sortBy.reverse) sortBy.reverse = false
+    if (sortBy.id === 'userId') {
+        data = data.sort((a, b) => a.userId - b.userId)
+        sortBy.reverse = !sortBy.reverse
+    } else if (sortBy.id === 'firstName' ||
+        sortBy.id === 'lastName' ||
+        sortBy.id === 'organizationCode') {
+        const { id } = sortBy
+        data = data.sort((a, b) => {
+            return a[id] > b[id] ? 1 : ((b[id] > a[id]) ? -1 : 0)
+        })
+        sortBy.reverse = !sortBy.reverse
+    }
+    if (!sortBy.reverse) return data.reverse()
+    else return data
+}
+
+
+function _getUsersJson(currentPage) {
+    return {
+        content: {
+            organizationCode: 'Ivory',
+            pageNum: currentPage.toString(),
+        }
+    }
+}
+
+function _getAccountsJson(userId) {
+    return {
+        content: {
+            userId,
+        }
+    }
 }

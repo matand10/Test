@@ -1,72 +1,60 @@
-import { userService } from '../../services/user.service'
+import { itemService } from '../../services/user.service.js'
 
 
-export function loadUsers() {
+export function loadUsers(currentPage) {
     return async dispatch => {
         try {
-            const users = await userService.getUsers()
+            const users = await itemService.getUsers(currentPage)
             dispatch({ type: 'SET_USERS', users })
-        } catch (err) {
-            console.log('UserActions: err in loadUsers', err)
-        }
-    }
-}
-
-export function updateUser(user) {
-    return async dispatch => {
-        try {
-            const savedUser = await userService.update(user)
-            dispatch({ type: 'UPDATE_USER', user: savedUser })
         } catch (err) {
             console.log(err)
         }
     }
 }
 
+
+export function setUsers(users) {
+    return async dispatch => {
+        try {
+            dispatch({ type: 'SET_USERS', users })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+
+export function setFilteredUsers(users) {
+    return async dispatch => {
+        try {
+            dispatch({ type: 'SET_FILTERED', users })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+
+
 export function removeUser(userId) {
     return async dispatch => {
         try {
-            await userService.remove(userId)
+            await itemService.remove(userId)
             dispatch({ type: 'REMOVE_USER', userId })
         } catch (err) {
-            console.log('UserActions: err in removeUser', err)
+            console.log(err)
         }
     }
 }
 
-export function onLogin(credentials) {
-    return async (dispatch) => {
+export function saveUser(user) {
+    return async dispatch => {
         try {
-            const user = await userService.login(credentials)
-            dispatch({ type: 'SET_USER', user })
+            const actionType = user.userId ? 'UPDATE_USER' : 'ADD_USER'
+            const savedUser = itemService.save(user)
+            dispatch({ type: actionType, user: savedUser })
         } catch (err) {
-            console.log('Cannot login', err)
+            console.log(err)
         }
     }
 }
-
-
-export function onSignup(credentials) {
-    return async (dispatch) => {
-        try {
-            const user = await userService.signup(credentials)
-            dispatch({ type: 'SET_USER', user })
-            return user
-        } catch (err) {
-            console.log('Cannot signup', err)
-        }
-
-    }
-}
-
-export function onLogout() {
-    return async (dispatch) => {
-        try {
-            await userService.logout()
-            dispatch({ type: 'SET_USER', user: null })
-        } catch (err) {
-            console.log('Cannot logout', err)
-        }
-    }
-}
-

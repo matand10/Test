@@ -3,8 +3,8 @@ import { useTable, useExpanded } from 'react-table'
 import { useDispatch } from "react-redux";
 
 
-import { itemService } from "../../services/item.service";
-import { setUsers } from "../../store/item/item.action";
+import { itemService } from "../../services/user.service";
+import { setUsers } from "../../store/user/user.action";
 
 
 import { TableHead } from "./table-head";
